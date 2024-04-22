@@ -467,3 +467,33 @@ public class MyStack<E> {
     }
 }
 
+
+public class MyQueue<E> {
+    private MyLinkedList<E> list = new MyLinkedList<>();
+
+    public void enqueue(E item) {
+        list.addLast(item);
+    }
+
+    public E dequeue() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue is empty");
+        }
+        return list.removeFirst();
+    }
+
+    public E peek() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue is empty");
+        }
+        return list.getFirst();
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public int size() {
+        return list.size();
+    }
+}
