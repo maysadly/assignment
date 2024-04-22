@@ -46,6 +46,7 @@ To use any of these data structures, instantiate the class with the type of elem
 MyStack<Integer> stack = new MyStack<>();
 MyQueue<String> queue = new MyQueue<>();
 MyMinHeap<Double> minHeap = new MyMinHeap<>();
+```
 
 
 # Custom Data Structures in Java
