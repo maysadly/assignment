@@ -497,3 +497,73 @@ public class MyQueue<E> {
         return list.size();
     }
 }
+
+
+public class MyMinHeap<E> extends Comparable<E>> {
+    private MyArrayList<E> heap = new MyArrayList<E>();
+
+    public void add(E item) {
+        heap.add(item);
+        int i = heap.size() - 1;
+        while (i > 0) {
+            int parent = (i - 1) / 2;
+            E currentItem = heap.get(i);
+            E parentItem = heap.get(parent);
+            if (currentItem.compareTo(parentItem) < 0) {
+                heap.set(i, parentItem);
+                heap.set(parent, currentItem);
+                i = parent;
+            } else {
+                break;
+            }
+        }
+    }
+
+    public E remove() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Heap is empty");
+        }
+        E removedItem = heap.get(0);
+        E lastItem = heap.remove(heap.size() - 1);
+        if (!heap.isEmpty()) {
+            heap.set(0, lastItem);
+            minHeapify(0);
+        }
+        return removedItem;
+    }
+
+    private void minHeapify(int i) {
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        int smallest = i;
+
+        if (left < heap.size() && heap.get(left).compareTo(heap.get(smallest)) < 0) {
+            smallest = left;
+        }
+        if (right < heap.size() && heap.get(right).compareTo(heap.get(smallest)) < 0) {
+            smallest = right;
+        }
+
+        if (smallest != i) {
+            E swap = heap.get(i);
+            heap.set(i, heap.get(smallest));
+            heap.set(smallest, swap);
+            minHeapify(smallest);
+        }
+    }
+
+    public E peek() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Heap is empty");
+        }
+        return heap.get(0);
+    }
+
+    public boolean isEmpty() {
+        return heap.isEmpty();
+    }
+
+    public int size() {
+        return heap.size();
+    }
+}
